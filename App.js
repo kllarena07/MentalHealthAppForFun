@@ -1,7 +1,8 @@
 import 'expo-dev-menu'
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import Svg, { Path } from 'react-native-svg'
 
 export default App = () => {
   const [text, onChangeText] = useState("");
@@ -14,7 +15,7 @@ export default App = () => {
   const removeTodo = (index) => {
     mutateTodos(todos => {
       const newTodos = [...todos]
-      newTodos.splice(index, 1);
+      newTodos.splice(index, 1)
       return newTodos
     })
   }
@@ -33,15 +34,25 @@ export default App = () => {
         }}>Your todo must be longer than 3 characters</Text>
       ) : ""}
       <Button title="Add Todo" onPress={() => addTodo(text)} disabled={text.length < 3}></Button>
-      {todos.map((item, index) => {
-        return (
-          <View>
-            {/*hacky fix, assign each key a unique index*/}
-            <Text key={`${item.name.slice(0, 2)}_customIndex`}>{item.name}</Text>
-            <Button title="X" onPress={() => removeTodo(index)}></Button>
-          </View>
-        )
-      })}
+      <Text>My Todos:</Text>
+      <View>
+        {todos.length > 0 ? (
+          <>
+            {
+              todos.map((item, index) => {
+                return (
+                  <View>
+                    <Text key={`${item.name.slice(0, 2)}_customIndex`}>{item.name}</Text>
+                    <Button title="X" onPress={() => removeTodo(index)}></Button>
+                  </View>
+                )
+              })
+            }
+          </>
+        ) : (
+          <Text>You have no todos. Go ahead and make some!</Text>
+        )}
+      </View>
     </View>
   );
 }
@@ -52,5 +63,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
