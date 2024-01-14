@@ -4,6 +4,28 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg'
 
+//Declare Variables
+class level {
+    constructor(exp, maxExp, lv) {
+        this.exp = exp; //Keeps track of the current amount of exp
+        this.maxExp = 5000; //Keeps track of the amount of exp needed to reach the next level
+        this.lv = lv; //Keeps track of level number
+    }
+    gainEXP(x){
+            exp += x; //adds exp to current exp
+            if (exp >= maxExp) { //if exp meets or exceeds max, declare a level up
+                lvUP();
+            }
+        }
+
+        lvUP(){
+            exp -= maxExp; //gets remaining exp
+            maxExp += 100; //raises the amount needed to reach the next level
+            lv++; //Incriments the level by 1
+        }
+
+    }
+
 export default App = () => {
   const [text, onChangeText] = useState("");
   const [todos, mutateTodos] = useState([]);
