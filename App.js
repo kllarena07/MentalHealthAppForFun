@@ -4,6 +4,28 @@ import { Path, Svg } from 'react-native-svg';
 import { StoredTasks, newTaskObj } from './lib/data/tasks';
 import 'expo-dev-menu'
 
+//Declare Variables
+class level {
+    constructor(exp, maxExp, lv) {
+        this.exp = exp; //Keeps track of the current amount of exp
+        this.maxExp = 5000; //Keeps track of the amount of exp needed to reach the next level
+        this.lv = lv; //Keeps track of level number
+    }
+    gainEXP(x){
+            exp += x; //adds exp to current exp
+            if (exp >= maxExp) { //if exp meets or exceeds max, declare a level up
+                lvUP();
+            }
+        }
+
+        lvUP(){
+            exp -= maxExp; //gets remaining exp
+            maxExp += 100; //raises the amount needed to reach the next level
+            lv++; //Incriments the level by 1
+        }
+
+    }
+
 const App = () => {
   const [text, changeText] = useState("")
   const [tasks, mutateTasks] = useState(StoredTasks)
